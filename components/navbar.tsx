@@ -9,9 +9,9 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 const navigation = [
-  { name: "Beranda", href: "/" },
+  { name: "Home", href: "/" },
   { name: "Tentang Kami", href: "/about" },
-  // { name: "Jasa Hukum", href: "/services" },
+  { name: "Jasa Hukum", href: "/services" },
   // { name: "Kerjasama", href: "/partnership" },
   // { name: "Tim Kami", href: "/team" },
   // { name: "Berita", href: "/news" },
