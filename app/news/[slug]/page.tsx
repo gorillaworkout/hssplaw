@@ -9,72 +9,99 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ArrowLeft, Calendar, User, Share2, Facebook, Twitter, Linkedin } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { getNewsBySlugFromFirestore, getRelatedNewsFromFirestore } from "@/lib/firestore"
 
-// Mock data - in real app, this would come from your database
-const mockArticle = {
-  id: "1",
-  title: "Perubahan Regulasi Hukum Korporasi 2024: Dampak dan Strategi Adaptasi",
-  content: `
-    <h2>Pendahuluan</h2>
-    <p>Tahun 2024 menandai era baru dalam regulasi hukum korporasi di Indonesia. Pemerintah telah mengeluarkan serangkaian peraturan baru yang akan berdampak signifikan terhadap cara perusahaan beroperasi dan menjalankan tata kelola korporasi.</p>
-    
-    <h2>Perubahan Utama dalam Regulasi</h2>
-    <p>Beberapa perubahan kunci yang perlu diperhatikan oleh perusahaan meliputi:</p>
-    <ul>
-      <li><strong>Transparansi Keuangan:</strong> Peningkatan standar pelaporan keuangan dengan implementasi sistem digital yang terintegrasi.</li>
-      <li><strong>Tata Kelola Perusahaan:</strong> Penguatan peran komisaris independen dan komite audit dalam pengawasan perusahaan.</li>
-      <li><strong>Perlindungan Stakeholder:</strong> Regulasi baru yang memberikan perlindungan lebih baik bagi pemegang saham minoritas dan kreditur.</li>
-      <li><strong>Compliance Digital:</strong> Kewajiban implementasi sistem compliance berbasis teknologi untuk monitoring real-time.</li>
-    </ul>
-
-    <h2>Dampak Terhadap Perusahaan</h2>
-    <p>Perubahan regulasi ini akan membawa dampak yang luas bagi perusahaan, baik dari segi operasional maupun strategis:</p>
-    
-    <h3>1. Aspek Operasional</h3>
-    <p>Perusahaan perlu melakukan penyesuaian dalam sistem internal, termasuk upgrade sistem IT, pelatihan karyawan, dan restrukturisasi departemen compliance.</p>
-    
-    <h3>2. Aspek Keuangan</h3>
-    <p>Investasi tambahan diperlukan untuk memenuhi standar baru, namun dalam jangka panjang akan meningkatkan efisiensi dan mengurangi risiko hukum.</p>
-
-    <h2>Strategi Adaptasi yang Direkomendasikan</h2>
-    <p>HSS Partners Law Firm merekomendasikan strategi berikut untuk menghadapi perubahan regulasi:</p>
-    
-    <ol>
-      <li><strong>Assessment Komprehensif:</strong> Lakukan evaluasi menyeluruh terhadap kondisi compliance saat ini.</li>
-      <li><strong>Roadmap Implementation:</strong> Susun rencana implementasi bertahap dengan timeline yang realistis.</li>
-      <li><strong>Training & Development:</strong> Investasi dalam pelatihan tim internal untuk memahami regulasi baru.</li>
-      <li><strong>Technology Upgrade:</strong> Implementasi sistem teknologi yang mendukung compliance otomatis.</li>
-      <li><strong>Legal Advisory:</strong> Konsultasi berkelanjutan dengan ahli hukum untuk memastikan compliance optimal.</li>
-    </ol>
-
-    <h2>Kesimpulan</h2>
-    <p>Perubahan regulasi hukum korporasi 2024 merupakan tantangan sekaligus peluang bagi perusahaan untuk meningkatkan standar tata kelola dan daya saing. Dengan persiapan yang matang dan strategi yang tepat, perusahaan dapat tidak hanya memenuhi compliance requirements tetapi juga memanfaatkan perubahan ini untuk pertumbuhan jangka panjang.</p>
-    
-    <p>Tim HSS Partners Law Firm siap membantu perusahaan Anda dalam menghadapi transisi ini dengan layanan konsultasi komprehensif dan solusi hukum yang inovatif.</p>
-  `,
-  excerpt:
-    "Analisis mendalam tentang perubahan regulasi terbaru yang mempengaruhi dunia korporasi di Indonesia dan strategi adaptasi yang diperlukan.",
-  category: "Hukum Korporasi",
-  author: "Habibullah, S.H., M.H.",
-  publishedAt: "2024-01-15",
-  image: "/placeholder.svg?height=400&width=800",
-  slug: "perubahan-regulasi-hukum-korporasi-2024",
-  readTime: "8 menit",
-  tags: ["Regulasi", "Korporasi", "Compliance", "2024"],
+interface NewsItem {
+  id: string
+  title: string
+  excerpt: string
+  content: string
+  category: string
+  author: string
+  publishedAt: string
+  imageUrl?: string
+  slug: string
 }
 
 export default function NewsDetailPage() {
   const params = useParams()
-  const [article, setArticle] = useState(mockArticle)
+  const [article, setArticle] = useState<NewsItem | null>(null)
+  const [relatedArticles, setRelatedArticles] = useState<NewsItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [notFound, setNotFound] = useState(false)
 
   useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 1000)
+    const loadArticle = async () => {
+      // Await params untuk Next.js 15 compatibility
+      const resolvedParams = await Promise.resolve(params)
+      if (!resolvedParams.slug) return
+      
+      try {
+        setIsLoading(true)
+        setNotFound(false)
+        
+        // Get article by slug
+        const articleData = await getNewsBySlugFromFirestore(resolvedParams.slug as string)
+        
+        if (!articleData) {
+          setNotFound(true)
+          return
+        }
 
-    return () => clearTimeout(timer)
+        // Transform article data
+        const transformedArticle: NewsItem = {
+          id: articleData.id,
+          title: (articleData as any).title || '',
+          excerpt: (articleData as any).excerpt || '',
+          content: (articleData as any).content || '',
+          category: (articleData as any).category || 'Uncategorized',
+          author: (articleData as any).author || 'Anonymous',
+          publishedAt: (articleData as any).publishedAt instanceof Date 
+            ? (articleData as any).publishedAt.toISOString() 
+            : (articleData as any).publishedAt?.toDate?.()?.toISOString?.() || new Date().toISOString(),
+          imageUrl: (articleData as any).imageUrl || '',
+          slug: (articleData as any).slug || articleData.id
+        }
+
+        setArticle(transformedArticle)
+
+        // Get related articles
+        try {
+          const relatedData = await getRelatedNewsFromFirestore(
+            transformedArticle.slug, 
+            transformedArticle.category, 
+            2
+          )
+          
+          const transformedRelated = relatedData.map((item: any) => ({
+            id: item.id,
+            title: item.title || '',
+            excerpt: item.excerpt || '',
+            content: item.content || '',
+            category: item.category || 'Uncategorized',
+            author: item.author || 'Anonymous',
+            publishedAt: item.publishedAt instanceof Date 
+              ? item.publishedAt.toISOString() 
+              : item.publishedAt?.toDate?.()?.toISOString?.() || new Date().toISOString(),
+            imageUrl: item.imageUrl || '',
+            slug: item.slug || item.id
+          }))
+          
+          setRelatedArticles(transformedRelated)
+        } catch (relatedError) {
+          console.error("Error loading related articles:", relatedError)
+          setRelatedArticles([])
+        }
+
+      } catch (error) {
+        console.error("Error loading article:", error)
+        setNotFound(true)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadArticle()
   }, [params.slug])
 
   if (isLoading) {
@@ -93,6 +120,38 @@ export default function NewsDetailPage() {
         </div>
       </div>
     )
+  }
+
+  if (notFound) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="bg-white border-b">
+          <div className="container mx-auto px-4 py-6">
+            <Button asChild variant="ghost" className="mb-4">
+              <Link href="/news">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Kembali ke Berita
+              </Link>
+            </Button>
+          </div>
+        </div>
+        <div className="container mx-auto px-4 py-12">
+          <div className="max-w-2xl mx-auto text-center">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">Artikel Tidak Ditemukan</h1>
+            <p className="text-gray-600 mb-8">
+              Artikel yang Anda cari tidak dapat ditemukan. Mungkin artikel telah dihapus atau URL tidak valid.
+            </p>
+            <Button asChild>
+              <Link href="/news">Lihat Semua Berita</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!article) {
+    return null
   }
 
   return (
@@ -141,7 +200,7 @@ export default function NewsDetailPage() {
                         })}
                       </span>
                     </div>
-                    <span>{article.readTime} baca</span>
+                    <span>5 menit baca</span>
                   </div>
 
                   <div className="flex items-center space-x-2">
@@ -162,9 +221,9 @@ export default function NewsDetailPage() {
             </div>
 
             {/* Featured Image */}
-            {article.image && (
+            {article.imageUrl && (
               <div className="relative h-64 md:h-96">
-                <Image src={article.image || "/placeholder.svg"} alt={article.title} fill className="object-cover" />
+                <Image src={article.imageUrl || "/placeholder.svg"} alt={article.title} fill className="object-cover" />
               </div>
             )}
 
@@ -177,13 +236,11 @@ export default function NewsDetailPage() {
 
               {/* Tags */}
               <div className="mt-8 pt-8 border-t">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Tags:</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Kategori:</h3>
                 <div className="flex flex-wrap gap-2">
-                  {article.tags.map((tag, index) => (
-                    <Badge key={index} variant="outline" className="text-blue-600 border-blue-600">
-                      {tag}
-                    </Badge>
-                  ))}
+                  <Badge variant="outline" className="text-blue-600 border-blue-600">
+                    {article.category}
+                  </Badge>
                 </div>
               </div>
             </div>
@@ -197,33 +254,35 @@ export default function NewsDetailPage() {
             className="mt-12"
           >
             <h2 className="text-2xl font-bold text-gray-900 mb-8">Artikel Terkait</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <Badge className="bg-green-600 text-white mb-3">Kontrak Bisnis</Badge>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Tips Menghindari Sengketa Kontrak Bisnis</h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Panduan praktis untuk menyusun kontrak bisnis yang solid dan menghindari potensi sengketa...
-                  </p>
-                  <Button asChild variant="ghost" className="text-blue-600 hover:bg-blue-50 p-0">
-                    <Link href="/news/tips-menghindari-sengketa-kontrak-bisnis">Baca Selengkapnya →</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <Badge className="bg-purple-600 text-white mb-3">Hukum Keluarga</Badge>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Hak dan Kewajiban dalam Hukum Keluarga</h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Memahami hak dan kewajiban suami istri dalam perkawinan menurut hukum Indonesia...
-                  </p>
-                  <Button asChild variant="ghost" className="text-blue-600 hover:bg-blue-50 p-0">
-                    <Link href="/news/hak-dan-kewajiban-dalam-hukum-keluarga">Baca Selengkapnya →</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+            {relatedArticles.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {relatedArticles.map((relatedArticle) => (
+                  <Card key={relatedArticle.id} className="hover:shadow-lg transition-shadow">
+                    <CardContent className="p-6">
+                      <Badge className="bg-blue-600 text-white mb-3">{relatedArticle.category}</Badge>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{relatedArticle.title}</h3>
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                        {relatedArticle.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
+                        <span>{relatedArticle.author}</span>
+                        <span>{new Date(relatedArticle.publishedAt).toLocaleDateString("id-ID")}</span>
+                      </div>
+                      <Button asChild variant="ghost" className="text-blue-600 hover:bg-blue-50 p-0">
+                        <Link href={`/news/${relatedArticle.slug}`}>Baca Selengkapnya →</Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-gray-600">Tidak ada artikel terkait yang ditemukan.</p>
+                <Button asChild variant="outline" className="mt-4">
+                  <Link href="/news">Lihat Semua Artikel</Link>
+                </Button>
+              </div>
+            )}
           </motion.div>
 
           {/* CTA Section */}

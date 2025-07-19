@@ -8,6 +8,7 @@ import { NewsFilters } from "@/components/news/news-filters"
 import { getNewsFromFirestore } from "@/lib/firestore"
 import { setArticles, setLoading } from "@/lib/slices/newsSlice"
 import type { RootState, AppDispatch } from "@/lib/store"
+import type { NewsItem } from "@/types/types"
 
 export default function NewsPage() {
   const dispatch = useDispatch<AppDispatch>()
@@ -19,10 +20,30 @@ export default function NewsPage() {
     const loadNews = async () => {
       try {
         dispatch(setLoading(true))
+        
+        // Fetch data directly from Firestore
         const newsData = await getNewsFromFirestore()
-        dispatch(setArticles(newsData))
+        const transformedNewsData = newsData.map((item: any) => ({
+          id: item.id,
+          title: item.title || '',
+          excerpt: item.excerpt || '',
+          content: item.content || '',
+          category: item.category || 'uncategorized',
+          author: item.author || 'Anonymous',
+          publishedAt: item.publishedAt instanceof Date 
+            ? item.publishedAt.toISOString() 
+            : item.publishedAt?.toDate?.()?.toISOString?.() || new Date().toISOString(),
+          imageUrl: item.imageUrl || '',
+          slug: item.slug || item.id
+        }))
+        
+        dispatch(setArticles(transformedNewsData as NewsItem[]))
       } catch (error) {
-        console.error("Error loading news:", error)
+        console.error("Error loading news from Firestore:", error)
+        // Show empty state instead of mock data
+        dispatch(setArticles([]))
+      } finally {
+        dispatch(setLoading(false))
       }
     }
 

@@ -3,11 +3,22 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { Menu, Scale, Phone, Mail } from "lucide-react"
+import { Menu, Scale, Phone, Mail, User, LogOut, Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from "@/lib/firebase"
+import { useUserRole } from "@/hooks/use-user-role"
+import { signOut } from "firebase/auth"
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -20,10 +31,13 @@ const navigation = [
 
 ]
 
-export function Navbar() {
+export default function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
+  const [user] = useAuthState(auth)
+  const { isAdmin, refreshUserData, userData } = useUserRole()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +46,29 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth)
+      router.push("/")
+    } catch (error) {
+      console.error("Error signing out:", error)
+    }
+  }
+
+  const getUserDisplayName = () => {
+    if (user?.displayName) return user.displayName
+    if (user?.email) return user.email.split("@")[0]
+    return "User"
+  }
+
+  // Debug info untuk troubleshooting admin menu
+  console.log("Navbar Debug:", {
+    user: user?.email,
+    userData,
+    isAdmin,
+    userRole: userData?.role
+  })
 
   return (
     <>
@@ -49,9 +86,37 @@ export function Navbar() {
             </div>
           </div>
           <div className="hidden md:block">
-            <Link href="/login" className="hover:text-yellow-400 transition-colors">
-              Login Admin
-            </Link>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="text-white hover:text-yellow-400 h-auto p-2">
+                    <User className="h-4 w-4 mr-2" />
+                    <span>{getUserDisplayName()}</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  {isAdmin && (
+                    <>
+                      <DropdownMenuItem asChild>
+                        <Link href="/admin/news" className="flex items-center">
+                          <Settings className="h-4 w-4 mr-2" />
+                          Admin Panel
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                    </>
+                  )}
+                  <DropdownMenuItem onClick={handleLogout} className="text-red-600">
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/login" className="hover:text-yellow-400 transition-colors">
+                Login Admin
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -107,7 +172,7 @@ export function Navbar() {
             </div>
 
             {/* Mobile Menu Button */}
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="lg:hidden">
                   <Menu className="h-6 w-6" />
@@ -115,6 +180,21 @@ export function Navbar() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                 <div className="flex flex-col space-y-4 mt-8">
+                  {/* User Info Section for Mobile */}
+                  {user && (
+                    <div className="pb-4 border-b">
+                      <div className="flex items-center space-x-3 px-4 py-2">
+                        <div className="h-10 w-10 bg-blue-600 rounded-full flex items-center justify-center">
+                          <User className="h-5 w-5 text-white" />
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-900">{getUserDisplayName()}</p>
+                          <p className="text-sm text-gray-500">{user.email}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
@@ -124,12 +204,50 @@ export function Navbar() {
                           ? "text-blue-600 bg-blue-50"
                           : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                       } rounded-lg`}
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
                     </Link>
                   ))}
-                  <Button className="gradient-blue text-white mt-4">Konsultasi Gratis</Button>
+
+                  {/* Admin and Logout for Mobile */}
+                  {user ? (
+                    <div className="space-y-2 pt-4 border-t">
+                      {isAdmin && (
+                        <Link
+                          href="/admin/news"
+                          className="flex items-center px-4 py-2 text-lg font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <Settings className="h-5 w-5 mr-3" />
+                          Admin Panel
+                        </Link>
+                      )}
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
+                        onClick={() => {
+                          handleLogout()
+                          setMobileMenuOpen(false)
+                        }}
+                      >
+                        <LogOut className="h-5 w-5 mr-3" />
+                        Logout
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button
+                      asChild
+                      className="gradient-blue text-white mt-4"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Link href="/login">Login</Link>
+                    </Button>
+                  )}
+
+                  {!user && (
+                    <Button className="gradient-blue text-white mt-4">Konsultasi Gratis</Button>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>

@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useDispatch, useSelector } from "react-redux"
 import { Button } from "@/components/ui/button"
@@ -18,6 +18,9 @@ import Image from "next/image"
 import { addArticle } from "@/lib/slices/newsSlice"
 import { saveNewsToFirestore, uploadImageToStorage } from "@/lib/firestore"
 import type { RootState, AppDispatch } from "@/lib/store"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from "@/lib/firebase"
+
 
 export default function CreateNews() {
   const router = useRouter()
@@ -34,6 +37,7 @@ export default function CreateNews() {
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const [firebaseUser, loading, authError] = useAuthState(auth)
 
   const categories = [
     "Hukum Korporasi",
@@ -45,6 +49,13 @@ export default function CreateNews() {
     "Berita Umum",
   ]
 
+    // Check authentication
+  useEffect(() => {
+    if (!loading && !firebaseUser) {
+      router.push("/login")
+    }
+  }, [firebaseUser, loading, router])
+
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
@@ -52,7 +63,24 @@ export default function CreateNews() {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
+      // Validasi ukuran file (2MB)
+      const maxSize = 2 * 1024 * 1024 // 2MB
+      if (file.size > maxSize) {
+        setError(`File terlalu besar. Maksimal 2MB. Ukuran file: ${(file.size / (1024 * 1024)).toFixed(2)}MB`)
+        return
+      }
+
+      // Validasi tipe file
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+      if (!allowedTypes.includes(file.type)) {
+        setError('Tipe file tidak diizinkan. Gunakan JPEG, PNG, atau WebP')
+        return
+      }
+
+      // Clear error jika file valid
+      setError("")
       setImage(file)
+
       const reader = new FileReader()
       reader.onloadend = () => {
         setImagePreview(reader.result as string)
@@ -60,7 +88,6 @@ export default function CreateNews() {
       reader.readAsDataURL(file)
     }
   }
-
   const removeImage = () => {
     setImage(null)
     setImagePreview(null)
@@ -75,11 +102,18 @@ export default function CreateNews() {
       .trim()
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!formData.title || !formData.content || !formData.category) {
       setError("Mohon lengkapi semua field yang wajib diisi")
+      return
+    }
+
+    // Check if user is authenticated
+    if (!firebaseUser) {
+      setError("Anda harus login terlebih dahulu")
+      router.push("/login")
       return
     }
 
@@ -90,31 +124,49 @@ export default function CreateNews() {
       let imageUrl = ""
 
       if (image) {
+        console.log("Uploading image...") // Debug log
         imageUrl = await uploadImageToStorage(image, `news/${Date.now()}_${image.name}`)
+        console.log("Image uploaded:", imageUrl) // Debug log
       }
 
       const newArticle = {
-        id: Date.now().toString(),
         title: formData.title,
         content: formData.content,
         excerpt: formData.excerpt || formData.content.substring(0, 150) + "...",
         imageUrl,
-        author: user?.displayName || "Admin",
+        author: firebaseUser.displayName || firebaseUser.email || "Admin",
         publishedAt: new Date().toISOString(),
         category: formData.category,
         slug: generateSlug(formData.title),
+        createdBy: firebaseUser.uid, // Add user ID
       }
 
-      await saveNewsToFirestore(newArticle)
-      dispatch(addArticle(newArticle))
-
+      console.log("Saving to Firestore...") // Debug log
+      const docId = await saveNewsToFirestore(newArticle)
+      console.log("Article saved successfully with ID:", docId) // Debug log
+      
+      // Add the document ID to the article for Redux
+      const articleWithId = { ...newArticle, id: docId }
+      dispatch(addArticle(articleWithId))
       router.push("/admin/news")
-    } catch (error) {
-      setError("Gagal menyimpan berita. Silakan coba lagi.")
+    } catch (error: any) {
       console.error("Error saving article:", error)
+      setError(`Gagal menyimpan berita: ${error.message}`)
     } finally {
       setIsLoading(false)
     }
+  }
+
+  // Show loading while checking auth
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p>Checking authentication...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -144,7 +196,7 @@ export default function CreateNews() {
                   <Label htmlFor="title">Judul *</Label>
                   <Input
                     id="title"
-                    value={formData.title}
+                    value={formData.title || ""}
                     onChange={(e) => handleInputChange("title", e.target.value)}
                     placeholder="Masukkan judul berita"
                     required
@@ -155,7 +207,7 @@ export default function CreateNews() {
                   <Label htmlFor="excerpt">Ringkasan</Label>
                   <Textarea
                     id="excerpt"
-                    value={formData.excerpt}
+                    value={formData.excerpt || ""}
                     onChange={(e) => handleInputChange("excerpt", e.target.value)}
                     placeholder="Ringkasan singkat berita (opsional)"
                     rows={3}
@@ -166,7 +218,7 @@ export default function CreateNews() {
                   <Label htmlFor="content">Konten *</Label>
                   <Textarea
                     id="content"
-                    value={formData.content}
+                    value={formData.content || ""}
                     onChange={(e) => handleInputChange("content", e.target.value)}
                     placeholder="Tulis konten berita lengkap di sini"
                     rows={12}
@@ -185,7 +237,7 @@ export default function CreateNews() {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="category">Kategori *</Label>
-                  <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
+                  <Select value={formData.category || ""} onValueChange={(value) => handleInputChange("category", value)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Pilih kategori" />
                     </SelectTrigger>
@@ -198,6 +250,7 @@ export default function CreateNews() {
                     </SelectContent>
                   </Select>
                 </div>
+
 
                 <div className="space-y-2">
                   <Label>Gambar</Label>
@@ -220,14 +273,20 @@ export default function CreateNews() {
                         >
                           <X className="h-4 w-4" />
                         </Button>
+                        {image && (
+                          <p className="text-xs text-gray-500 mt-2">
+                            {image.name} ({(image.size / (1024 * 1024)).toFixed(2)}MB)
+                          </p>
+                        )}
                       </div>
                     ) : (
                       <div className="text-center">
                         <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                        <p className="text-sm text-gray-600 mb-2">Upload gambar berita</p>
+                        <p className="text-sm text-gray-600 mb-1">Upload gambar berita</p>
+                        <p className="text-xs text-gray-400 mb-2">Maksimal 2MB (JPEG, PNG, WebP)</p>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/jpeg,image/jpg,image/png,image/webp"
                           onChange={handleImageChange}
                           className="hidden"
                           id="image-upload"

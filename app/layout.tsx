@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { Providers } from "@/components/providers"
-import { Navbar } from "@/components/navbar"
+import Navbar from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { LoadingProvider } from "@/components/layout/loading-provider"
 import { GoogleAnalytics } from "@/components/analytics"
@@ -108,7 +108,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -122,7 +122,7 @@ export default function RootLayout({
         <link rel="canonical" href="https://hssplawfirm.com" />
         <meta name="google-site-verification" content="your-google-verification-code" />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <GoogleAnalytics ga_id="G-XXXXXXXXXX" />
         <WebVitals />
         <Providers>

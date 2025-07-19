@@ -4,6 +4,12 @@ import { cn } from "@/lib/utils"
 
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type, ...props }, ref) => {
+    // Ensure value is never undefined if it exists
+    const safeProps = { ...props }
+    if ('value' in safeProps && safeProps.value === undefined) {
+      safeProps.value = ""
+    }
+    
     return (
       <input
         type={type}
@@ -12,7 +18,7 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
           className
         )}
         ref={ref}
-        {...props}
+        {...safeProps}
       />
     )
   }
