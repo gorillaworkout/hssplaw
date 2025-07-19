@@ -13,7 +13,7 @@ const navigation = [
   { name: "Tentang Kami", href: "/about" },
   { name: "Jasa Hukum", href: "/services" },
   { name: "Kerjasama", href: "/partnership" },
-  // { name: "Tim Kami", href: "/team" },
+  { name: "Tim Kami", href: "/team" },
   // { name: "Berita", href: "/news" },
   // { name: "Kontak", href: "/contact" },
 ]
