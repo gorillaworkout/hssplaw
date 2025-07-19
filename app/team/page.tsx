@@ -5,10 +5,32 @@ import { TeamValues } from "@/components/team/team-values"
 import { TeamJoin } from "@/components/team/team-join"
 
 export const metadata: Metadata = {
-  title: "Tim Kami - HSS Partners Law Firm",
+  title: "Tim Advokat Terbaik Indonesia - HSS Partners | Pengacara Berpengalaman 20+ Tahun",
   description:
-    "Kenali tim ahli hukum HSS Partners yang berpengalaman dan profesional. Para advokat terbaik dengan keahlian di berbagai bidang hukum.",
-  keywords: "tim hukum, advokat berpengalaman, pengacara profesional, ahli hukum indonesia",
+    "Tim advokat terbaik HSS Partners dengan pengalaman 20+ tahun. Para ahli hukum lulusan universitas terkemuka dalam & luar negeri, spesialis di bidang hukum bisnis, litigasi, korporat, dan merger akuisisi. Bergabunglah dengan tim pemenang award.",
+  keywords: "tim advokat terbaik indonesia, pengacara berpengalaman, ahli hukum bisnis, advokat litigasi terbaik, lawyer indonesia, pengacara korporat, tim hukum profesional, advokat merger akuisisi",
+  openGraph: {
+    title: "Tim Advokat Terbaik Indonesia - HSS Partners",
+    description: "Tim advokat dengan pengalaman 20+ tahun, lulusan universitas terkemuka, spesialis hukum bisnis & litigasi",
+    url: "https://hssplawfirm.com/team",
+    images: [
+      {
+        url: "/hsslogo.png",
+        width: 1200,
+        height: 630,
+        alt: "Tim Advokat HSS Partners",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tim Advokat Terbaik Indonesia - HSS Partners",
+    description: "Tim advokat berpengalaman 20+ tahun, spesialis hukum bisnis & litigasi",
+    images: ["/hsslogo.png"],
+  },
+  alternates: {
+    canonical: "https://hssplawfirm.com/team",
+  },
 }
 
 export default function TeamPage() {

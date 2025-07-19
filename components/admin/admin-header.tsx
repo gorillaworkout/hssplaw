@@ -8,6 +8,7 @@ import { Scale, LogOut, User } from "lucide-react"
 import { logout } from "@/lib/auth"
 import { clearUser } from "@/lib/slices/authSlice"
 import type { RootState, AppDispatch } from "@/lib/store"
+import Image from "next/image"
 
 export function AdminHeader() {
   const dispatch = useDispatch<AppDispatch>()
@@ -26,9 +27,7 @@ export function AdminHeader() {
     <header className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-2 rounded-lg">
-            <Scale className="h-6 w-6 text-white" />
-          </div>
+          <Image src="/hssnotext.png" alt="HSS Partners Logo" width={50} height={100} />
           <div>
             <h1 className="text-xl font-bold text-gray-900">HSS Partners</h1>
             <p className="text-sm text-gray-600">Admin Panel</p>

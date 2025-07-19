@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Scale } from "lucide-react"
+import Image from "next/image"
 
 export function PageLoader() {
   return (
@@ -29,7 +30,7 @@ export function PageLoader() {
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
             >
-              <Scale className="h-16 w-16 text-white" />
+              <Image src="/hssnotext.png" alt="HSS Partners Logo" width={50} height={100} />
             </motion.div>
           </motion.div>
 

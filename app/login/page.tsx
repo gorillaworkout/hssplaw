@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useSelector, useDispatch } from "react-redux"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
@@ -59,9 +60,7 @@ export default function LoginPage() {
       >
         <Card className="border-0 shadow-2xl bg-white/80 backdrop-blur-sm">
           <CardHeader className="text-center space-y-4">
-            <div className="mx-auto bg-gradient-to-r from-blue-600 to-blue-800 p-4 rounded-full w-fit">
-              <Scale className="h-8 w-8 text-white" />
-            </div>
+            <Image src="/hssnotext.png" alt="HSS Partners Logo" width={50} height={100} />
             <div>
               <CardTitle className="text-2xl font-bold text-gray-900">Admin Login</CardTitle>
               <p className="text-gray-600 mt-2">HSS Partners Law Firm</p>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Scale, Award, Users, Target } from "lucide-react"
+import Image from "next/image"
 
 export function AboutHero() {
   return (
@@ -25,7 +26,7 @@ export function AboutHero() {
             className="space-y-6"
           >
             <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-              <Scale className="h-4 w-4 mr-2" />
+              <Image src="/hssnotext.png" alt="HSS Partners Logo" width={50} height={100} />
               Tentang HSS Partners
             </div>
 

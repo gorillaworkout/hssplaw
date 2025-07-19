@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Scale, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
 
 export function Footer() {
@@ -13,9 +14,7 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-2 rounded-lg">
-                <Scale className="h-6 w-6 text-white" />
-              </div>
+              <Image src="/hssnotext.png" alt="HSS Partners Logo" width={50} height={100} />
               <div>
                 <h3 className="text-lg font-bold">HSS Partners</h3>
                 <p className="text-sm text-gray-400">Law Firm</p>

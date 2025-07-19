@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Scale, CheckCircle } from "lucide-react"
+import Image from "next/image"
 
 export function ServicesHero() {
   const highlights = ["Konsultasi 24/7", "Tim Ahli Berpengalaman", "Standar Internasional", "Solusi Komprehensif"]
@@ -27,7 +28,7 @@ export function ServicesHero() {
             className="space-y-6"
           >
             <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium">
-              <Scale className="h-4 w-4 mr-2" />
+              <Image src="/hssnotext.png" alt="HSS Partners Logo" width={50} height={100} />
               Layanan Hukum Profesional
             </div>
 

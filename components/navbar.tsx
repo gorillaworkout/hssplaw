@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 import { Menu, Scale, Phone, Mail } from "lucide-react"
@@ -16,6 +17,7 @@ const navigation = [
   { name: "Tim Kami", href: "/team" },
   // { name: "Berita", href: "/news" },
   // { name: "Kontak", href: "/contact" },
+
 ]
 
 export function Navbar() {
@@ -67,9 +69,7 @@ export function Navbar() {
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-2 rounded-lg">
-                <Scale className="h-8 w-8 text-white" />
-              </div>
+              <Image src="/hssnotext.png" alt="HSS Partners Logo" width={50} height={100} />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">HSS Partners</h1>
                 <p className="text-sm text-gray-600">Law Firm</p>
