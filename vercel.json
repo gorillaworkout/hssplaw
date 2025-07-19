@@ -1,11 +1,10 @@
 {
-  "buildCommand": "pnpm build",
-  "devCommand": "pnpm dev",
-  "installCommand": "pnpm install",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install --legacy-peer-deps",
   "framework": "nextjs",
   "regions": ["sin1"],
   "functions": {
-    "app/api/**/*.ts": {
+    "app/**/*.js": {
       "maxDuration": 30
     }
   },
@@ -28,14 +27,11 @@
       ]
     }
   ],
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/robots.txt",
-      "destination": "/api/robots"
-    },
-    {
-      "source": "/sitemap.xml",
-      "destination": "/api/sitemap"
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
     }
   ]
 }

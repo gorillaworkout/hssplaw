@@ -10,9 +10,7 @@ const nextConfig = {
     unoptimized: true,
     domains: ['localhost'],
   },
-  experimental: {
-    serverComponentsExternalPackages: [],
-  },
+  serverExternalPackages: [],
   // Vercel configuration
   trailingSlash: false,
   poweredByHeader: false,
