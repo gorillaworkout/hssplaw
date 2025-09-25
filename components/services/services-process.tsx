@@ -1,68 +1,71 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { MessageCircle, FileSearch, Gavel, CheckCircle } from "lucide-react"
+import { MessageCircle, FileSearch, Gavel, CheckCircle, Scale, Users } from "lucide-react"
 
 export function ServicesProcess() {
   const steps = [
     {
       icon: MessageCircle,
       title: "Konsultasi Awal",
-      description: "Diskusi mendalam tentang masalah hukum Anda dengan tim ahli kami",
+      description: "Diskusi mendalam tentang masalah hukum Anda dengan tim advokat berpengalaman",
       color: "text-blue-600",
       bgColor: "bg-blue-50",
     },
     {
       icon: FileSearch,
-      title: "Analisis Kasus",
-      description: "Penelitian hukum menyeluruh dan penyusunan strategi terbaik",
+      title: "Analisis & Penelitian",
+      description: "Penelitian hukum menyeluruh, studi kasus, dan penyusunan strategi terbaik",
       color: "text-green-600",
       bgColor: "bg-green-50",
     },
     {
-      icon: Gavel,
-      title: "Eksekusi Strategi",
-      description: "Implementasi solusi hukum dengan pendekatan profesional",
+      icon: Scale,
+      title: "Penyusunan Dokumen",
+      description: "Penyusunan dokumen hukum, kontrak, dan perjanjian yang sesuai dengan kebutuhan",
       color: "text-yellow-600",
       bgColor: "bg-yellow-50",
     },
     {
-      icon: CheckCircle,
-      title: "Penyelesaian",
-      description: "Monitoring hasil dan follow-up untuk memastikan kepuasan klien",
+      icon: Gavel,
+      title: "Representasi Hukum",
+      description: "Representasi di pengadilan, negosiasi, dan implementasi solusi hukum",
       color: "text-purple-600",
       bgColor: "bg-purple-50",
+    },
+    {
+      icon: Users,
+      title: "Pendampingan",
+      description: "Pendampingan berkelanjutan dan konsultasi untuk memastikan kepuasan klien",
+      color: "text-indigo-600",
+      bgColor: "bg-indigo-50",
+    },
+    {
+      icon: CheckCircle,
+      title: "Penyelesaian",
+      description: "Monitoring hasil, evaluasi, dan follow-up untuk memastikan keberhasilan",
+      color: "text-red-600",
+      bgColor: "bg-red-50",
     },
   ]
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-4">
-        <motion.div
-          className="text-center space-y-4 mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
+        <div className="text-center space-y-4 mb-16">
           <h2 className="text-4xl md:text-5xl font-bold">
             <span className="text-gray-900">Proses</span>
-            <span className="text-gradient-gold"> Kerja Kami</span>
+            <span className="text-gradient-gold"> Konsultasi</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Metodologi yang terbukti untuk memberikan hasil terbaik bagi setiap klien
+            Metodologi profesional yang terbukti untuk memberikan solusi hukum terbaik bagi setiap klien
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {steps.map((step, index) => (
-            <motion.div
+            <div
               key={step.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              viewport={{ once: true }}
               className="relative"
             >
               <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white group hover:-translate-y-2">
@@ -79,7 +82,7 @@ export function ServicesProcess() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-3">{step.title}</h3>
-                    <p className="text-gray-600">{step.description}</p>
+                    <p className="text-gray-600 text-sm">{step.description}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -88,7 +91,7 @@ export function ServicesProcess() {
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-blue-600 to-blue-800 transform -translate-y-1/2 z-10"></div>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

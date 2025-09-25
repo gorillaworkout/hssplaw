@@ -6,34 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Linkedin, Mail, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { teamPreview } from "@/lib/team-data"
 
 export function TeamSection() {
-  const teamMembers = [
-    {
-      name: "Habibullah, S.H., M.H.",
-      position: "Managing Partner",
-      specialization: "Hukum Korporasi & Litigasi",
-      experience: "20+ tahun",
-      image: "/placeholder.svg?height=300&width=300",
-      description: "Ahli hukum korporasi dengan pengalaman luas dalam merger & akuisisi serta litigasi bisnis.",
-    },
-    {
-      name: "Sahura, S.H., LL.M.",
-      position: "Senior Partner",
-      specialization: "Hukum Properti & Kontrak",
-      experience: "18+ tahun",
-      image: "/placeholder.svg?height=300&width=300",
-      description: "Spesialis hukum properti dan kontrak bisnis dengan track record yang excellent.",
-    },
-    {
-      name: "Sudana, S.H., M.Kn.",
-      position: "Senior Partner",
-      specialization: "Hukum Pidana & Keluarga",
-      experience: "15+ tahun",
-      image: "/placeholder.svg?height=300&width=300",
-      description: "Praktisi hukum pidana dan keluarga yang berpengalaman dalam berbagai kasus kompleks.",
-    },
-  ]
+  const teamMembers = teamPreview
 
   return (
     <section className="py-20 bg-white">

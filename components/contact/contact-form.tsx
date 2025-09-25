@@ -29,12 +29,16 @@ export function ContactForm() {
   const [error, setError] = useState("")
 
   const serviceTypes = [
-    "Hukum Korporasi",
-    "Litigasi",
-    "Kontrak Bisnis",
-    "Hukum Properti",
-    "Hukum Keluarga",
-    "Hukum Pidana",
+    "Hukum Korporasi & Komersial",
+    "Litigasi & Sengketa",
+    "Hukum Ketenagakerjaan",
+    "Hukum Pertanahan & Properti",
+    "Hukum Keluarga & Waris",
+    "Legal Due Diligence / Legal Opinion",
+    "Konsultasi & Pendampingan Hukum",
+    "Arbitrase & Mediasi",
+    "Mediasi Perbankan & Lelang Hak Tanggungan",
+    "Somasi",
     "Konsultasi Umum",
   ]
 

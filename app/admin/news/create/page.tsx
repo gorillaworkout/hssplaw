@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { RichTextEditor } from "@/components/ui/rich-text-editor"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { ArrowLeft, Upload, X } from "lucide-react"
@@ -40,12 +41,16 @@ export default function CreateNews() {
   const [firebaseUser, loading, authError] = useAuthState(auth)
 
   const categories = [
-    "Hukum Korporasi",
-    "Litigasi",
-    "Kontrak Bisnis",
-    "Hukum Properti",
-    "Hukum Keluarga",
-    "Hukum Pidana",
+    "Hukum Korporasi & Komersial",
+    "Litigasi & Sengketa",
+    "Hukum Ketenagakerjaan",
+    "Hukum Pertanahan & Properti",
+    "Hukum Keluarga & Waris",
+    "Legal Due Diligence / Legal Opinion",
+    "Konsultasi & Pendampingan Hukum",
+    "Arbitrase & Mediasi",
+    "Mediasi Perbankan & Lelang Hak Tanggungan",
+    "Somasi",
     "Berita Umum",
   ]
 
@@ -196,7 +201,7 @@ export default function CreateNews() {
                   <Label htmlFor="title">Judul *</Label>
                   <Input
                     id="title"
-                    value={formData.title || ""}
+                    value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
                     placeholder="Masukkan judul berita"
                     required
@@ -207,7 +212,7 @@ export default function CreateNews() {
                   <Label htmlFor="excerpt">Ringkasan</Label>
                   <Textarea
                     id="excerpt"
-                    value={formData.excerpt || ""}
+                    value={formData.excerpt}
                     onChange={(e) => handleInputChange("excerpt", e.target.value)}
                     placeholder="Ringkasan singkat berita (opsional)"
                     rows={3}
@@ -216,13 +221,11 @@ export default function CreateNews() {
 
                 <div className="space-y-2">
                   <Label htmlFor="content">Konten *</Label>
-                  <Textarea
-                    id="content"
-                    value={formData.content || ""}
-                    onChange={(e) => handleInputChange("content", e.target.value)}
-                    placeholder="Tulis konten berita lengkap di sini"
-                    rows={12}
-                    required
+                  <RichTextEditor
+                    value={formData.content}
+                    onChange={(value) => handleInputChange("content", value)}
+                    placeholder="Tulis konten berita lengkap di sini. Gunakan toolbar di atas untuk memformat teks."
+                    className="min-h-[300px]"
                   />
                 </div>
               </CardContent>
@@ -237,7 +240,7 @@ export default function CreateNews() {
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="category">Kategori *</Label>
-                  <Select value={formData.category || ""} onValueChange={(value) => handleInputChange("category", value)}>
+                  <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Pilih kategori" />
                     </SelectTrigger>

@@ -3,48 +3,12 @@
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Building2, Gavel, FileText, Home, Users, Shield, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { servicesPreview } from "@/lib/services-data"
 
 export function ServicesSection() {
-  const services = [
-    {
-      icon: Building2,
-      title: "Hukum Korporasi",
-      description: "Konsultasi hukum bisnis, pendirian perusahaan, merger & akuisisi, dan kepatuhan korporasi.",
-      features: ["Pendirian PT/CV", "Merger & Akuisisi", "Kepatuhan Regulasi", "Kontrak Bisnis"],
-    },
-    {
-      icon: Gavel,
-      title: "Litigasi",
-      description: "Representasi hukum di pengadilan untuk berbagai jenis sengketa perdata dan pidana.",
-      features: ["Sengketa Bisnis", "Perkara Pidana", "Arbitrase", "Mediasi"],
-    },
-    {
-      icon: FileText,
-      title: "Kontrak & Perjanjian",
-      description: "Penyusunan, review, dan negosiasi berbagai jenis kontrak dan perjanjian bisnis.",
-      features: ["Kontrak Kerja", "Perjanjian Bisnis", "MOU", "Legal Review"],
-    },
-    {
-      icon: Home,
-      title: "Hukum Properti",
-      description: "Layanan hukum terkait properti, tanah, dan real estate untuk individu dan perusahaan.",
-      features: ["Jual Beli Properti", "Sertifikat Tanah", "Sengketa Tanah", "Due Diligence"],
-    },
-    {
-      icon: Users,
-      title: "Hukum Keluarga",
-      description: "Konsultasi dan representasi untuk masalah hukum keluarga dan perkawinan.",
-      features: ["Perceraian", "Hak Asuh Anak", "Waris", "Adopsi"],
-    },
-    {
-      icon: Shield,
-      title: "Hukum Pidana",
-      description: "Pembelaan dan konsultasi untuk berbagai kasus pidana dengan pendekatan profesional.",
-      features: ["Pembelaan Pidana", "Konsultasi Hukum", "Pendampingan", "Legal Advice"],
-    },
-  ]
+  const services = servicesPreview
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">

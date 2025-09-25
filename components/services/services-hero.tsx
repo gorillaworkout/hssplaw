@@ -1,11 +1,10 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Scale, CheckCircle } from "lucide-react"
 import Image from "next/image"
 
 export function ServicesHero() {
-  const highlights = ["Konsultasi 24/7", "Tim Ahli Berpengalaman", "Standar Internasional", "Solusi Komprehensif"]
+  const highlights = ["Konsultasi Hukum", "Tim Advokat Berpengalaman", "Standar Profesional", "Solusi Terpercaya"]
 
   return (
     <section className="relative py-20 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
@@ -21,49 +20,36 @@ export function ServicesHero() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6">
             <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium">
               <Image src="/hssnotext.png" alt="HSS Partners Logo" width={50} height={100} />
               Layanan Hukum Profesional
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              <span className="text-white">Solusi Hukum</span>
+              <span className="text-white">Layanan Hukum</span>
               <br />
-              <span className="text-yellow-400">Komprehensif</span>
+              <span className="text-yellow-400">Terpercaya</span>
             </h1>
 
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Kami menyediakan berbagai layanan hukum dengan standar internasional untuk memenuhi kebutuhan individu,
-              bisnis, dan korporasi dengan pendekatan yang inovatif dan hasil yang optimal.
+              HSSP Law menyediakan layanan hukum yang komprehensif dengan tim advokat berpengalaman 
+              untuk memberikan solusi hukum terbaik bagi klien individu, bisnis, dan korporasi.
             </p>
-          </motion.div>
+          </div>
 
           {/* Highlights */}
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-          >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
             {highlights.map((highlight, index) => (
-              <motion.div
+              <div
                 key={highlight}
                 className="flex items-center space-x-2 justify-center"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 + index * 0.1 }}
               >
                 <CheckCircle className="h-5 w-5 text-yellow-400" />
                 <span className="text-sm font-medium">{highlight}</span>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

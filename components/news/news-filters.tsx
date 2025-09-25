@@ -14,12 +14,16 @@ interface NewsFiltersProps {
 export function NewsFilters({ selectedCategory, onCategoryChange, searchTerm, onSearchChange }: NewsFiltersProps) {
   const categories = [
     { value: "all", label: "Semua Kategori" },
-    { value: "Hukum Korporasi", label: "Hukum Korporasi" },
-    { value: "Litigasi", label: "Litigasi" },
-    { value: "Kontrak Bisnis", label: "Kontrak Bisnis" },
-    { value: "Hukum Properti", label: "Hukum Properti" },
-    { value: "Hukum Keluarga", label: "Hukum Keluarga" },
-    { value: "Hukum Pidana", label: "Hukum Pidana" },
+    { value: "Hukum Korporasi & Komersial", label: "Hukum Korporasi & Komersial" },
+    { value: "Litigasi & Sengketa", label: "Litigasi & Sengketa" },
+    { value: "Hukum Ketenagakerjaan", label: "Hukum Ketenagakerjaan" },
+    { value: "Hukum Pertanahan & Properti", label: "Hukum Pertanahan & Properti" },
+    { value: "Hukum Keluarga & Waris", label: "Hukum Keluarga & Waris" },
+    { value: "Legal Due Diligence / Legal Opinion", label: "Legal Due Diligence" },
+    { value: "Konsultasi & Pendampingan Hukum", label: "Konsultasi & Pendampingan" },
+    { value: "Arbitrase & Mediasi", label: "Arbitrase & Mediasi" },
+    { value: "Mediasi Perbankan & Lelang Hak Tanggungan", label: "Mediasi Perbankan" },
+    { value: "Somasi", label: "Somasi" },
     { value: "Berita Umum", label: "Berita Umum" },
   ]
 

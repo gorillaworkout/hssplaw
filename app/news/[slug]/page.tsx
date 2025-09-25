@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowLeft, Calendar, User, Share2, Facebook, Twitter, Linkedin } from "lucide-react"
+import { ArrowLeft, Calendar, User, Share2, Facebook, Twitter, Linkedin, Copy } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { getNewsBySlugFromFirestore, getRelatedNewsFromFirestore } from "@/lib/firestore"
@@ -29,6 +29,38 @@ export default function NewsDetailPage() {
   const [relatedArticles, setRelatedArticles] = useState<NewsItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
+
+  // Social sharing functions
+  const shareToFacebook = () => {
+    const url = encodeURIComponent(window.location.href)
+    const title = encodeURIComponent(article?.title || '')
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`
+    window.open(facebookUrl, '_blank', 'width=600,height=400')
+  }
+
+  const shareToTwitter = () => {
+    const url = encodeURIComponent(window.location.href)
+    const title = encodeURIComponent(article?.title || '')
+    const twitterUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`
+    window.open(twitterUrl, '_blank', 'width=600,height=400')
+  }
+
+  const shareToLinkedIn = () => {
+    const url = encodeURIComponent(window.location.href)
+    const title = encodeURIComponent(article?.title || '')
+    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}`
+    window.open(linkedinUrl, '_blank', 'width=600,height=400')
+  }
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href)
+      // You could add a toast notification here
+      alert('Link berhasil disalin ke clipboard!')
+    } catch (err) {
+      console.error('Failed to copy: ', err)
+    }
+  }
 
   useEffect(() => {
     const loadArticle = async () => {
@@ -206,14 +238,41 @@ export default function NewsDetailPage() {
                   <div className="flex items-center space-x-2">
                     <Share2 className="h-4 w-4" />
                     <span>Bagikan:</span>
-                    <Button size="sm" variant="ghost" className="text-blue-600 hover:bg-blue-50">
+                    <Button 
+                      size="sm" 
+                      variant="ghost" 
+                      className="text-blue-600 hover:bg-blue-50"
+                      onClick={shareToFacebook}
+                      title="Bagikan ke Facebook"
+                    >
                       <Facebook className="h-4 w-4" />
                     </Button>
-                    <Button size="sm" variant="ghost" className="text-blue-400 hover:bg-blue-50">
+                    <Button 
+                      size="sm" 
+                      variant="ghost" 
+                      className="text-blue-400 hover:bg-blue-50"
+                      onClick={shareToTwitter}
+                      title="Bagikan ke Twitter"
+                    >
                       <Twitter className="h-4 w-4" />
                     </Button>
-                    <Button size="sm" variant="ghost" className="text-blue-700 hover:bg-blue-50">
+                    <Button 
+                      size="sm" 
+                      variant="ghost" 
+                      className="text-blue-700 hover:bg-blue-50"
+                      onClick={shareToLinkedIn}
+                      title="Bagikan ke LinkedIn"
+                    >
                       <Linkedin className="h-4 w-4" />
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="ghost" 
+                      className="text-gray-600 hover:bg-gray-50"
+                      onClick={copyToClipboard}
+                      title="Salin link"
+                    >
+                      <Copy className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
@@ -223,7 +282,13 @@ export default function NewsDetailPage() {
             {/* Featured Image */}
             {article.imageUrl && (
               <div className="relative h-64 md:h-96">
-                <Image src={article.imageUrl || "/placeholder.svg"} alt={article.title} fill className="object-cover" />
+                <Image 
+                  src={article.imageUrl || "/placeholder.svg"} 
+                  alt={article.title} 
+                  fill 
+                  className="object-cover"
+                  priority
+                />
               </div>
             )}
 

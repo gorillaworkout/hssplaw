@@ -1,7 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Scale, Award, Users, Target } from "lucide-react"
+import { Award, Users, Target } from "lucide-react"
 import Image from "next/image"
 
 export function AboutHero() {
@@ -19,12 +18,7 @@ export function AboutHero() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6">
             <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
               <Image src="/hssnotext.png" alt="HSS Partners Logo" width={50} height={100} />
               Tentang HSS Partners
@@ -38,18 +32,14 @@ export function AboutHero() {
             </h1>
 
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Habibullah Sahura Sudana Partners Law Firm telah melayani klien dengan dedikasi tinggi selama lebih dari
-              15 tahun, memberikan solusi hukum yang inovatif dan komprehensif untuk berbagai kebutuhan hukum.
+              Kantor Hukum Habibullah Sahura Sudana & Partners (HSSP) yang
+              didirikan oleh para profesional hukum berpengalaman yang memiliki
+              komitmen tinggi terhadap penegakan hukum dan keadilan.
             </p>
-          </motion.div>
+          </div>
 
           {/* Key Highlights */}
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
             <div className="text-center space-y-4">
               <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-4 rounded-full w-fit mx-auto">
                 <Award className="h-8 w-8 text-white" />
@@ -79,7 +69,7 @@ export function AboutHero() {
                 Mengutamakan kepentingan klien dengan solusi hukum yang efektif dan efisien
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

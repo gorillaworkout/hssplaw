@@ -74,26 +74,26 @@ function EditNewsModal({ article, onUpdate }: { article: NewsItem; onUpdate: (up
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState<EditFormData>({
-    title: article.title || "",
-    excerpt: article.excerpt || "",
-    content: article.content || "",
-    category: article.category || "",
-    author: article.author || "",
+    title: article?.title || "",
+    excerpt: article?.excerpt || "",
+    content: article?.content || "",
+    category: article?.category || "",
+    author: article?.author || "",
     imageFile: null,
-    imageUrl: article.imageUrl || "",
+    imageUrl: article?.imageUrl || "",
   })
 
   // Reset form data when article changes or modal opens
   useEffect(() => {
     if (isOpen) {
       setFormData({
-        title: article.title || "",
-        excerpt: article.excerpt || "",
-        content: article.content || "",
-        category: article.category || "",
-        author: article.author || "",
+        title: article?.title || "",
+        excerpt: article?.excerpt || "",
+        content: article?.content || "",
+        category: article?.category || "",
+        author: article?.author || "",
         imageFile: null,
-        imageUrl: article.imageUrl || "",
+        imageUrl: article?.imageUrl || "",
       })
       
       // Reset file input
@@ -196,7 +196,7 @@ function EditNewsModal({ article, onUpdate }: { article: NewsItem; onUpdate: (up
             <Label htmlFor="title">Judul *</Label>
             <Input
               id="title"
-              value={formData.title || ""}
+              value={formData.title}
               onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
               required
             />
@@ -206,7 +206,7 @@ function EditNewsModal({ article, onUpdate }: { article: NewsItem; onUpdate: (up
             <Label htmlFor="excerpt">Ringkasan *</Label>
             <Textarea
               id="excerpt"
-              value={formData.excerpt || ""}
+              value={formData.excerpt}
               onChange={(e) => setFormData(prev => ({ ...prev, excerpt: e.target.value }))}
               rows={3}
               required
@@ -217,7 +217,7 @@ function EditNewsModal({ article, onUpdate }: { article: NewsItem; onUpdate: (up
             <Label htmlFor="content">Konten *</Label>
             <Textarea
               id="content"
-              value={formData.content || ""}
+              value={formData.content}
               onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
               rows={8}
               required
@@ -227,7 +227,7 @@ function EditNewsModal({ article, onUpdate }: { article: NewsItem; onUpdate: (up
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="category">Kategori *</Label>
-              <Select value={formData.category || ""} onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}>
+              <Select value={formData.category} onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}>
                 <SelectTrigger>
                   <SelectValue placeholder="Pilih kategori" />
                 </SelectTrigger>
@@ -246,7 +246,7 @@ function EditNewsModal({ article, onUpdate }: { article: NewsItem; onUpdate: (up
               <Label htmlFor="author">Penulis *</Label>
               <Input
                 id="author"
-                value={formData.author || ""}
+                value={formData.author}
                 onChange={(e) => setFormData(prev => ({ ...prev, author: e.target.value }))}
                 required
               />
@@ -462,8 +462,8 @@ export default function NewsManagement() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
                 placeholder="Cari berita..."
-                value={searchTerm || ""}
-                onChange={(e) => setSearchTerm(e.target.value || "")}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
               />
             </div>

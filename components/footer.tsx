@@ -69,28 +69,43 @@ export function Footer() {
             <h4 className="text-lg font-semibold text-gradient-gold">Layanan</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/services/corporate" className="text-gray-400 hover:text-white transition-colors">
-                  Hukum Korporasi
+                <Link href="/services" className="text-gray-400 hover:text-white transition-colors">
+                  Litigasi & Sengketa
                 </Link>
               </li>
               <li>
-                <Link href="/services/litigation" className="text-gray-400 hover:text-white transition-colors">
-                  Litigasi
+                <Link href="/services" className="text-gray-400 hover:text-white transition-colors">
+                  Hukum Korporasi & Komersial
                 </Link>
               </li>
               <li>
-                <Link href="/services/contract" className="text-gray-400 hover:text-white transition-colors">
-                  Kontrak Bisnis
+                <Link href="/services" className="text-gray-400 hover:text-white transition-colors">
+                  Hukum Ketenagakerjaan
                 </Link>
               </li>
               <li>
-                <Link href="/services/property" className="text-gray-400 hover:text-white transition-colors">
-                  Properti
+                <Link href="/services" className="text-gray-400 hover:text-white transition-colors">
+                  Hukum Pertanahan & Properti
                 </Link>
               </li>
               <li>
-                <Link href="/services/family" className="text-gray-400 hover:text-white transition-colors">
-                  Hukum Keluarga
+                <Link href="/services" className="text-gray-400 hover:text-white transition-colors">
+                  Hukum Keluarga & Waris
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="text-gray-400 hover:text-white transition-colors">
+                  Legal Due Diligence
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="text-gray-400 hover:text-white transition-colors">
+                  Konsultasi & Pendampingan
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="text-gray-400 hover:text-white transition-colors">
+                  Arbitrase & Mediasi
                 </Link>
               </li>
             </ul>

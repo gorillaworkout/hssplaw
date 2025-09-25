@@ -9,3 +9,15 @@ export interface NewsItem {
   imageUrl?: string
   slug: string
 }
+
+export interface TeamMember {
+  name: string
+  position: string
+  specialization: string
+  experience: string
+  education: string
+  image: string
+  description: string
+  achievements: string[]
+  languages: string[]
+}
