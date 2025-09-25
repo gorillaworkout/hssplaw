@@ -56,7 +56,7 @@ export function ContactHero() {
             </div>
             <div className="text-center space-y-2">
               <MapPin className="h-8 w-8 text-yellow-400 mx-auto" />
-              <p className="text-sm font-medium">Jakarta Pusat</p>
+              <p className="text-sm font-medium">Surabaya</p>
             </div>
             <div className="text-center space-y-2">
               <Clock className="h-8 w-8 text-yellow-400 mx-auto" />

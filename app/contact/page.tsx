@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { ContactHero } from "@/components/contact/contact-hero"
 import { ContactForm } from "@/components/contact/contact-form"
 import { ContactInfo } from "@/components/contact/contact-info"
-import { ContactMap } from "@/components/contact/contact-map"
+import { OfficeLocation } from "@/components/contact/office-location"
 
 export const metadata: Metadata = {
   title: "Kontak HSS Partners - Konsultasi Hukum GRATIS 24/7 | Hubungi Sekarang!",
@@ -42,7 +42,11 @@ export default function ContactPage() {
           <ContactForm />
           <div className="space-y-8">
             <ContactInfo />
-            <ContactMap />
+            <OfficeLocation 
+              latitude={-7.2575}
+              longitude={112.7521}
+              address="Jl. Raya Darmo Permai III No. 1, Surabaya, Jawa Timur 60241"
+            />
           </div>
         </div>
       </div>

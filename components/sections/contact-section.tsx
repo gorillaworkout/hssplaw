@@ -7,13 +7,14 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { OfficeLocation } from "@/components/contact/office-location"
 
 export function ContactSection() {
   const contactInfo = [
     {
       icon: MapPin,
       title: "Alamat Kantor",
-      details: ["Jl. Sudirman No. 123", "Jakarta Pusat 10220", "Indonesia"],
+      details: ["Jl. Raya Darmo Permai III No. 1", "Surabaya 60241", "Jawa Timur, Indonesia"],
     },
     {
       icon: Phone,
@@ -141,22 +142,18 @@ export function ContactSection() {
               ))}
             </div>
 
-            {/* Map Placeholder */}
+            {/* Google Maps */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <Card className="border-0 shadow-xl overflow-hidden">
-                <div className="h-64 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                  <div className="text-center space-y-2">
-                    <MapPin className="h-12 w-12 text-blue-600 mx-auto" />
-                    <p className="text-blue-800 font-medium">Google Maps</p>
-                    <p className="text-blue-600 text-sm">Lokasi Kantor HSS Partners</p>
-                  </div>
-                </div>
-              </Card>
+              <OfficeLocation 
+                latitude={-7.2575}
+                longitude={112.7521}
+                address="Jl. Raya Darmo Permai III No. 1, Surabaya, Jawa Timur 60241"
+              />
             </motion.div>
           </motion.div>
         </div>
