@@ -42,7 +42,7 @@ export function OrganizationSEO() {
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+62-21-XXXXXXX',
+      telephone: '+62-821-4079-0009',
       email: 'info@hssplawfirm.com'
     }
   }

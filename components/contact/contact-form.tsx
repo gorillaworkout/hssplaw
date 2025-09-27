@@ -163,7 +163,7 @@ export function ContactForm() {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange("phone", e.target.value)}
-                placeholder="+62 812 3456 7890"
+                placeholder="0821-4079-0009"
               />
             </div>
 

@@ -11,14 +11,14 @@ export const SEO_CONFIG = {
     legalName: "Habibullah Sahura Sudana Partners",
     foundingDate: "1995",
     address: {
-      street: "Jl. Sudirman Kav. 52-53",
-      city: "Jakarta Pusat",
-      region: "DKI Jakarta",
+      street: "Jl. Dr. Wahidin Sudirohusodo no. 680, Kebomas, Kab. Gresik Jawa Timur",
+      city: "Gresik",
+      region: "Jawa Timur",
       postalCode: "10210",
       country: "ID"
     },
     contact: {
-      phone: "+62-21-XXXXXXX",
+      phone: "+62-821-4079-0009",
       email: "info@hssplawfirm.com"
     },
     geo: {

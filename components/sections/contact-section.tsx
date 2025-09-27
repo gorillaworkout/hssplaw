@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { OfficeLocation } from "@/components/contact/office-location"
+import { PhoneNumber, PHONE_NUMBERS } from "@/components/ui/phone-number"
 
 export function ContactSection() {
   const contactInfo = [
@@ -19,7 +20,7 @@ export function ContactSection() {
     {
       icon: Phone,
       title: "Telepon",
-      details: ["+62 21 1234 5678", "+62 21 8765 4321"],
+      details: [PHONE_NUMBERS.primary, PHONE_NUMBERS.secondary, PHONE_NUMBERS.tertiary],
     },
     {
       icon: Mail,
@@ -88,7 +89,7 @@ export function ContactSection() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone">Nomor Telepon</Label>
-                  <Input id="phone" type="tel" placeholder="+62 812 3456 7890" />
+                  <Input id="phone" type="tel" placeholder="0821-4079-0009" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subjek</Label>
@@ -131,9 +132,19 @@ export function ContactSection() {
                       <h3 className="font-semibold text-gray-900">{info.title}</h3>
                       <div className="space-y-1">
                         {info.details.map((detail, idx) => (
-                          <p key={idx} className="text-sm text-gray-600">
-                            {detail}
-                          </p>
+                          <div key={idx} className="text-sm text-gray-600">
+                            {info.title === "Telepon" ? (
+                              <PhoneNumber 
+                                phone={detail} 
+                                variant="both" 
+                                size="sm"
+                                className="justify-start p-0 h-auto"
+                                textClassName="text-gray-600"
+                              />
+                            ) : (
+                              <p>{detail}</p>
+                            )}
+                          </div>
                         ))}
                       </div>
                     </CardContent>

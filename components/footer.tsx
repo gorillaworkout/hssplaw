@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Scale, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import { PhoneNumber, PHONE_NUMBERS } from "@/components/ui/phone-number"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -119,18 +120,22 @@ export function Footer() {
                 <MapPin className="h-5 w-5 text-gray-400 mt-0.5" />
                 <div>
                   <p className="text-gray-400 text-sm">
-                    Jl. Sudirman No. 123
+                    Jl. Dr. Wahidin Sudirohusodo no. 680, Kebomas, 
                     <br />
-                    Jakarta Pusat 10220
+                    Kab. Gresik Jawa Timur
                     <br />
                     Indonesia
                   </p>
                 </div>
               </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-gray-400" />
-                <p className="text-gray-400 text-sm">+62 21 1234 5678</p>
-              </div>
+              <PhoneNumber 
+                phone={PHONE_NUMBERS.primary}
+                variant="default"
+                size="sm"
+                className="text-gray-400 hover:text-white"
+                textClassName="text-gray-400"
+                iconClassName="text-gray-400"
+              />
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-gray-400" />
                 <p className="text-gray-400 text-sm">info@hssplawfirm.com</p>

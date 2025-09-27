@@ -91,7 +91,7 @@ export default function RootLayout({
     "url": "https://hssplawfirm.com",
     "logo": "https://hssplawfirm.com/hsslogo.png",
     "image": "https://hssplawfirm.com/hsslogo.png",
-    "telephone": "+62-21-XXXXXXX",
+    "telephone": "+62-821-4079-0009",
     "email": "info@hssplawfirm.com",
     "address": {
       "@type": "PostalAddress",

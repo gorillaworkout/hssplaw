@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Phone, Mail, MessageCircle, ArrowRight, Clock, Shield } from "lucide-react"
+import { PhoneNumber, PHONE_NUMBERS } from "@/components/ui/phone-number"
 import Link from "next/link"
 
 export function ServicesCTA() {
@@ -52,7 +53,14 @@ export function ServicesCTA() {
                 <Phone className="h-8 w-8 text-yellow-400 mx-auto" />
                 <div>
                   <h3 className="font-semibold text-white mb-2">Telepon</h3>
-                  <p className="text-blue-100 text-sm">+62 21 1234 5678</p>
+                  <PhoneNumber 
+                    phone={PHONE_NUMBERS.primary}
+                    variant="default"
+                    size="sm"
+                    className="text-blue-100 hover:text-white justify-center"
+                    textClassName="text-blue-100"
+                    showIcon={false}
+                  />
                 </div>
               </CardContent>
             </Card>
@@ -72,7 +80,14 @@ export function ServicesCTA() {
                 <MessageCircle className="h-8 w-8 text-yellow-400 mx-auto" />
                 <div>
                   <h3 className="font-semibold text-white mb-2">WhatsApp</h3>
-                  <p className="text-blue-100 text-sm">+62 812 3456 7890</p>
+                  <PhoneNumber 
+                    phone={PHONE_NUMBERS.primary}
+                    variant="whatsapp"
+                    size="sm"
+                    className="text-blue-100 hover:text-white justify-center"
+                    textClassName="text-blue-100"
+                    showIcon={false}
+                  />
                 </div>
               </CardContent>
             </Card>

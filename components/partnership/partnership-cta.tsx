@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Download, Mail, Phone, ArrowRight } from "lucide-react"
+import { PhoneNumber, PHONE_NUMBERS } from "@/components/ui/phone-number"
 
 export function PartnershipCTA() {
   return (
@@ -60,7 +61,14 @@ export function PartnershipCTA() {
                 <Phone className="h-8 w-8 text-yellow-400 mx-auto" />
                 <div>
                   <h3 className="font-semibold text-white mb-2">Hotline Partnership</h3>
-                  <p className="text-green-100 text-sm">+62 21 1234 5679</p>
+                  <PhoneNumber 
+                    phone={PHONE_NUMBERS.primary}
+                    variant="default"
+                    size="sm"
+                    className="text-green-100 hover:text-white justify-center"
+                    textClassName="text-green-100"
+                    showIcon={false}
+                  />
                 </div>
               </CardContent>
             </Card>

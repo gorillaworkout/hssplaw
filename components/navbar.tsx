@@ -6,6 +6,7 @@ import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { Menu, Scale, Phone, Mail, User, LogOut, Settings } from "lucide-react"
+import { PhoneNumber, PHONE_NUMBERS } from "@/components/ui/phone-number"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {
@@ -76,10 +77,13 @@ export default function Navbar() {
       <div className="bg-blue-900 text-white py-2 px-4 text-sm">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <Phone className="h-4 w-4" />
-              <span>+62 21 1234 5678</span>
-            </div>
+            <PhoneNumber 
+              phone={PHONE_NUMBERS.primary}
+              variant="default"
+              size="sm"
+              className="text-white hover:text-yellow-400"
+              textClassName="text-white"
+            />
             <div className="flex items-center space-x-2">
               <Mail className="h-4 w-4" />
               <span>info@hssplawfirm.com</span>

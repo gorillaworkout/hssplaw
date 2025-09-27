@@ -13,13 +13,13 @@ export function LocalBusinessSchema() {
       "https://hssplawfirm.com/hsslogo.png",
       "https://hssplawfirm.com/hssnotext.png"
     ],
-    "telephone": "+62-21-XXXXXXX",
+    "telephone": "+62-821-4079-0009",
     "email": "info@hssplawfirm.com",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Jl. Sudirman No. 123",
-      "addressLocality": "Jakarta Pusat",
-      "addressRegion": "DKI Jakarta",
+      "streetAddress": "Jl. Dr. Wahidin Sudirohusodo no. 680, Kebomas, Kab. Gresik Jawa Timur",
+      "addressLocality": "Gresik Jawa Timur",
+      "addressRegion": "Jawa Timur",
       "postalCode": "10220",
       "addressCountry": "ID"
     },
