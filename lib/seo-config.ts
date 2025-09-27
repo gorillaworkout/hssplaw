@@ -3,13 +3,13 @@ export const SEO_CONFIG = {
   siteName: "HSS Partners Law Firm",
   siteUrl: "https://hssplawfirm.com",
   defaultTitle: "HSS Partners Law Firm - Firma Hukum Terpercaya #1 di Indonesia",
-  defaultDescription: "Firma hukum terpercaya #1 di Indonesia dengan pengalaman 20+ tahun. Layanan konsultasi hukum, litigasi, hukum bisnis, merger & akuisisi. Konsultasi GRATIS hari ini!",
+  defaultDescription: "Firma hukum terpercaya #1 di Indonesia yang didirikan pada 2025. Layanan konsultasi hukum, litigasi, hukum bisnis, merger & akuisisi. Konsultasi GRATIS hari ini!",
   
   // Organization Info
   organization: {
     name: "HSS Partners Law Firm",
     legalName: "Habibullah Sahura Sudana Partners",
-    foundingDate: "1995",
+    foundingDate: "2025",
     address: {
       street: "Jl. Dr. Wahidin Sudirohusodo no. 680, Kebomas, Kab. Gresik Jawa Timur",
       city: "Gresik",
@@ -99,7 +99,7 @@ export const SEO_CONFIG = {
     },
     {
       question: "Berapa lama pengalaman HSS Partners di bidang hukum?",
-      answer: "HSS Partners telah berpengalaman lebih dari 20 tahun dalam memberikan layanan hukum profesional di Indonesia sejak tahun 1995."
+      answer: "HSS Partners didirikan pada tahun 2025 dan telah memulai beberapa proyek hukum pertama dengan fokus pada layanan hukum profesional di Indonesia."
     },
     {
       question: "Apakah HSS Partners menyediakan konsultasi gratis?",

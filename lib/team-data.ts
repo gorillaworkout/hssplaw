@@ -74,7 +74,7 @@ export const teamMembersData: TeamMember[] = [
     name: "DR. AMI RADITYA, S.H., M.Kn",
     position: "Founder & Notary Partner",
     specialization: "Notaris, Pendirian Badan Usaha, Koperasi, Yayasan, OSS, Kredit Bank & KPR",
-    experience: "15+ tahun",
+    experience: "10+ tahun",
     education: "Universitas Airlangga (Sarjana hingga Doktor)",
     image: "/placeholder.svg?height=400&width=400",
     description: "Lulusan Sarjana hingga Doktor di Fakultas Hukum Universitas Airlangga Surabaya. Aktif sebagai Notaris dengan berbagai keanggotaan profesional dan sertifikasi khusus.",

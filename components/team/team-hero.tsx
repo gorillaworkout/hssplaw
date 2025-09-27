@@ -35,7 +35,7 @@ export function TeamHero() {
             </h1>
 
             <p className="text-xl text-purple-100 max-w-3xl mx-auto">
-              Dipimpin oleh para ahli hukum terbaik dengan pengalaman puluhan tahun, tim kami siap memberikan solusi
+              Dipimpin oleh para ahli hukum terbaik yang didirikan pada 2025, tim kami siap memberikan solusi
               hukum terdepan untuk setiap tantangan yang Anda hadapi.
             </p>
           </motion.div>
@@ -53,7 +53,7 @@ export function TeamHero() {
             </div>
             <div className="text-center space-y-2">
               <Star className="h-8 w-8 text-yellow-400 mx-auto" />
-              <div className="text-2xl font-bold">15+</div>
+              <div className="text-2xl font-bold">1</div>
               <p className="text-sm text-purple-200">Tahun Pengalaman</p>
             </div>
             <div className="text-center space-y-2">

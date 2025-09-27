@@ -7,7 +7,7 @@ import { ServicesCTA } from "@/components/services/services-cta"
 export const metadata: Metadata = {
   title: "Layanan Hukum Terlengkap - HSS Partners | Konsultasi, Litigasi, Hukum Bisnis & Korporat",
   description:
-    "Layanan hukum terlengkap dari HSS Partners: konsultasi hukum, litigasi perdata & pidana, hukum bisnis, merger & akuisisi, hukum korporat, kontrak, properti, keluarga. Tim advokat berpengalaman 20+ tahun dengan tingkat keberhasilan 95%.",
+    "Layanan hukum terlengkap dari HSS Partners: konsultasi hukum, litigasi perdata & pidana, hukum bisnis, merger & akuisisi, hukum korporat, kontrak, properti, keluarga. Tim advokat profesional dengan komitmen tinggi.",
   keywords: "layanan hukum terlengkap, konsultasi hukum jakarta, litigasi perdata pidana, hukum bisnis indonesia, merger akuisisi, hukum korporat, kontrak bisnis, advokat properti, pengacara keluarga, jasa hukum profesional",
   openGraph: {
     title: "Layanan Hukum Terlengkap - HSS Partners Law Firm",

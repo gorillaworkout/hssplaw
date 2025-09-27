@@ -92,7 +92,7 @@ export function HeroSection() {
                 <div className="text-sm text-gray-600">Kasus Berhasil</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600">15+</div>
+                <div className="text-3xl font-bold text-blue-600">1</div>
                 <div className="text-sm text-gray-600">Tahun Pengalaman</div>
               </div>
               <div className="text-center">

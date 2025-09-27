@@ -7,27 +7,27 @@ import { Calendar, Award, Users, Building } from "lucide-react"
 export function AboutHistory() {
   const timeline = [
     {
-      year: "2009",
+      year: "2025",
       title: "Pendirian Firma",
       description: "HSS Partners Law Firm didirikan dengan visi menjadi firma hukum terdepan di Indonesia",
       icon: Building,
     },
     {
-      year: "2012",
-      title: "Ekspansi Tim",
-      description: "Menambah tim ahli hukum berpengalaman dari berbagai bidang spesialisasi",
+      year: "2025",
+      title: "Proyek Pertama",
+      description: "Memulai beberapa proyek hukum pertama dengan fokus pada hukum korporasi dan bisnis",
       icon: Users,
     },
     {
-      year: "2016",
-      title: "Penghargaan Pertama",
-      description: "Meraih penghargaan sebagai firma hukum terbaik kategori hukum korporasi",
+      year: "2025",
+      title: "Pengembangan Tim",
+      description: "Membangun tim ahli hukum berpengalaman dari berbagai bidang spesialisasi",
       icon: Award,
     },
     {
-      year: "2020",
-      title: "Digitalisasi Layanan",
-      description: "Mengimplementasikan teknologi digital untuk meningkatkan efisiensi layanan",
+      year: "2025",
+      title: "Teknologi Modern",
+      description: "Mengimplementasikan teknologi digital modern untuk meningkatkan efisiensi layanan",
       icon: Calendar,
     },
   ]
@@ -47,14 +47,14 @@ export function AboutHistory() {
             <span className="text-gradient-blue"> Kami</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Lebih dari satu dekade melayani dengan dedikasi dan profesionalisme tinggi
+            Memulai perjalanan dengan dedikasi dan profesionalisme tinggi untuk melayani klien terbaik
           </p>
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
           {timeline.map((item, index) => (
             <motion.div
-              key={item.year}
+              key={`${item.year}-${index}`}
               className="relative flex items-center mb-12 last:mb-0"
               initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               whileInView={{ opacity: 1, x: 0 }}

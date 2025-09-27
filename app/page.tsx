@@ -9,11 +9,11 @@ import { ContactSection } from "@/components/sections/contact-section"
 export const metadata: Metadata = {
   title: "HSS Partners Law Firm - Firma Hukum Terpercaya #1 di Indonesia | Konsultasi Hukum Profesional",
   description:
-    "HSS Partners adalah firma hukum terpercaya #1 di Indonesia dengan pengalaman 20+ tahun. Layanan konsultasi hukum, litigasi, hukum bisnis, merger & akuisisi, hukum perusahaan. Konsultasi GRATIS hari ini!",
+    "HSS Partners adalah firma hukum terpercaya #1 di Indonesia yang didirikan pada 2025. Layanan konsultasi hukum, litigasi, hukum bisnis, merger & akuisisi, hukum perusahaan. Konsultasi GRATIS hari ini!",
   keywords: "firma hukum terbaik indonesia, konsultasi hukum jakarta, pengacara terpercaya, advokat profesional, jasa hukum bisnis, litigasi terbaik, merger akuisisi, hukum perusahaan, HSS Partners, konsultasi hukum gratis",
   openGraph: {
     title: "HSS Partners Law Firm - Firma Hukum Terpercaya #1 di Indonesia",
-    description: "Firma hukum dengan pengalaman 20+ tahun. Konsultasi hukum, litigasi, hukum bisnis terbaik. Konsultasi GRATIS hari ini!",
+    description: "Firma hukum yang didirikan pada 2025. Konsultasi hukum, litigasi, hukum bisnis terbaik. Konsultasi GRATIS hari ini!",
     url: "https://hssplawfirm.com",
     images: [
       {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "HSS Partners Law Firm - Firma Hukum Terpercaya #1 di Indonesia",
-    description: "Firma hukum dengan pengalaman 20+ tahun. Konsultasi GRATIS hari ini!",
+    description: "Firma hukum yang didirikan pada 2025. Konsultasi GRATIS hari ini!",
     images: ["/hsslogo.png"],
   },
   alternates: {

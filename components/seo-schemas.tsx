@@ -33,7 +33,7 @@ export function OrganizationSEO() {
     name: 'HSS Partners Law Firm',
     url: 'https://hssplawfirm.com',
     logo: 'https://hssplawfirm.com/hsslogo.png',
-    description: 'Firma hukum profesional di Indonesia dengan pengalaman 20+ tahun',
+    description: 'Firma hukum profesional di Indonesia yang didirikan pada 2025',
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'ID',

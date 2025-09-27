@@ -7,11 +7,11 @@ import { AboutStats } from "@/components/about/about-stats"
 export const metadata: Metadata = {
   title: "Tentang HSS Partners - Sejarah & Visi Misi Firma Hukum Terpercaya Indonesia",
   description:
-    "Pelajari sejarah HSS Partners Law Firm sejak 1995, visi misi, nilai-nilai, dan komitmen kami dalam memberikan layanan hukum terbaik di Indonesia. Tim advokat berpengalaman 20+ tahun melayani klien korporat dan individu.",
+    "Pelajari sejarah HSS Partners Law Firm yang didirikan pada 2025, visi misi, nilai-nilai, dan komitmen kami dalam memberikan layanan hukum terbaik di Indonesia. Tim advokat berpengalaman melayani klien korporat dan individu.",
   keywords: "tentang hss partners, sejarah firma hukum indonesia, visi misi law firm, nilai-nilai hukum, pengalaman firma hukum, advokat berpengalaman, sejarah pengacara indonesia",
   openGraph: {
     title: "Tentang HSS Partners - Sejarah & Visi Misi Firma Hukum Terpercaya",
-    description: "Sejarah HSS Partners sejak 1995, visi misi, dan komitmen dalam layanan hukum terbaik di Indonesia",
+    description: "Sejarah HSS Partners yang didirikan pada 2025, visi misi, dan komitmen dalam layanan hukum terbaik di Indonesia",
     url: "https://hssplawfirm.com/about",
     images: [
       {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Tentang HSS Partners - Sejarah & Visi Misi Firma Hukum",
-    description: "Sejarah HSS Partners sejak 1995, visi misi, dan komitmen dalam layanan hukum terbaik",
+    description: "Sejarah HSS Partners yang didirikan pada 2025, visi misi, dan komitmen dalam layanan hukum terbaik",
     images: ["/hsslogo.png"],
   },
   alternates: {

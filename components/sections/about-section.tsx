@@ -73,7 +73,7 @@ export function AboutSection() {
                 viewport={{ once: true }}
               >
                 Habibullah Sahura Sudana Partners Law Firm didirikan dengan visi menjadi firma hukum terdepan yang
-                memberikan solusi hukum komprehensif dan inovatif. Dengan pengalaman lebih dari 15 tahun, kami telah
+                memberikan solusi hukum komprehensif dan inovatif. Didirikan pada 2025, kami telah
                 membantu ratusan klien dari berbagai sektor industri.
               </motion.p>
             </div>

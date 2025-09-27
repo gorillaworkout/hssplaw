@@ -24,7 +24,7 @@ export function AboutStats() {
     },
     {
       icon: Award,
-      number: "15+",
+      number: "5+",
       label: "Penghargaan",
       description: "Prestasi nasional & internasional",
       color: "text-yellow-600",
@@ -32,9 +32,9 @@ export function AboutStats() {
     },
     {
       icon: Clock,
-      number: "15+",
+      number: "1",
       label: "Tahun Pengalaman",
-      description: "Melayani dengan dedikasi",
+      description: "Memulai dengan dedikasi tinggi",
       color: "text-purple-600",
       bgColor: "bg-purple-50",
     },

@@ -16,7 +16,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "HSS Partners Law Firm - Habibullah Sahura Sudana Partners | Firma Hukum Terpercaya Indonesia",
   description:
-    "Firma hukum terpercaya HSS Partners menyediakan layanan hukum profesional di Indonesia. Konsultasi hukum, litigasi, hukum bisnis, hukum perusahaan, dan berbagai layanan hukum lainnya dengan pengalaman puluhan tahun.",
+    "Firma hukum terpercaya HSS Partners menyediakan layanan hukum profesional di Indonesia. Konsultasi hukum, litigasi, hukum bisnis, hukum perusahaan, dan berbagai layanan hukum lainnya yang didirikan pada 2025.",
   keywords: "law firm indonesia, firma hukum jakarta, konsultasi hukum, advokat indonesia, pengacara profesional, hukum bisnis, litigasi, hukum perusahaan, jasa hukum, HSS Partners, Habibullah Sahura Sudana",
   authors: [{ name: "HSS Partners Law Firm" }, { name: "Habibullah Sahura Sudana Partners" }],
   creator: "HSS Partners Law Firm",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "HSS Partners Law Firm - Firma Hukum Terpercaya Indonesia",
-    description: "Firma hukum profesional dengan pengalaman puluhan tahun. Layanan konsultasi hukum, litigasi, hukum bisnis, dan hukum perusahaan terbaik di Indonesia.",
+    description: "Firma hukum profesional yang didirikan pada 2025. Layanan konsultasi hukum, litigasi, hukum bisnis, dan hukum perusahaan terbaik di Indonesia.",
     url: "https://hssplawfirm.com",
     siteName: "HSS Partners Law Firm",
     locale: "id_ID",

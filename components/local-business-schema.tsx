@@ -106,7 +106,7 @@ export function LocalBusinessSchema() {
       "@type": "Person",
       "name": "Habibullah Sahura Sudana"
     },
-    "foundingDate": "1995",
+    "foundingDate": "2025",
     "numberOfEmployees": {
       "@type": "QuantitativeValue",
       "value": 50

@@ -28,7 +28,7 @@ export function AboutHero() {
               <span className="text-gray-900">Firma Hukum</span>
               <br />
               <span className="text-gradient-blue">Terpercaya</span>
-              <span className="text-gradient-gold"> Sejak 2009</span>
+              <span className="text-gradient-gold"> Sejak 2025</span>
             </h1>
 
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
